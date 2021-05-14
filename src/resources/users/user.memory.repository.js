@@ -1,6 +1,6 @@
-const getAll = async () => {
+const getAll = async () => 
   // TODO: mock implementation. should be replaced during task development
-  return [];
-};
+  [{id: 154, name: 'di', login: 'kio', password: '15446dcd'}]
+;
 
 module.exports = { getAll };
