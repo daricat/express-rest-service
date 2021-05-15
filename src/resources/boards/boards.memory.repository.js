@@ -14,7 +14,7 @@ class BoardDB {
 
   getBoardById(id) {
     const foundBoardIndex = this.boards.find((board) => board.id === id);
-    if (!foundBoardIndex) return undefined;
+    if (!foundBoardIndex) throw new Error();
 
     return foundBoardIndex;
   }
@@ -30,16 +30,7 @@ class BoardDB {
   }
 
   deleteBoard(id) {
-    // console.log('================================================');
-    // console.log(id, 'id')
-    // console.log('delete до');
-    // console.log(this.boards, 'delete до');
-    // console.log('---------------------------------------------');
     this.boards = this.boards.filter((board) => board.id !== id);
-    return this.board;
-    // console.log('delete после');
-    // console.log(this.boards);
-    // console.log('================================================');
   }
 }
 

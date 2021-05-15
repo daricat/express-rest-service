@@ -1,5 +1,7 @@
 const router = require('express').Router();
+
 const boardService = require('./boards.service');
+const taskDB = require('../tasks/tasks.memory.repository');
 
 // Get all boards
 
@@ -11,8 +13,12 @@ router.route('/').get(async (req, res) => {
 // Get board by id
 
 router.route('/:boardId').get(async (req, res) => {
-  const result = await boardService.getBoardById(req.params.boardId);
-  res.status(200).send(result);
+  try {
+    const result = await boardService.getBoardById(req.params.boardId);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(404).send('Board isn\'t found');
+  }
 });
 
 // Create board
@@ -33,6 +39,7 @@ router.route('/:boardId').put(async (req, res) => {
 
 router.route('/:boardId').delete(async (req, res) => {
   await boardService.deleteBoard(req.params.boardId);
+  await taskDB.deleteBoardsIdFromTask(req.params.boardId);
   res.status(200).send();
 });
 
