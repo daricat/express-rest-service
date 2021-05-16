@@ -38,11 +38,17 @@ class TaskDB {
   }
 
   deleteBoardsIdFromTask(boardId) {
-    this.tasks.forEach((task) => { if (task.boardId === boardId) task.boardId = null });
+    this.tasks.forEach((task) => { 
+      const taskCopy = task;
+      if (taskCopy.boardId === boardId) taskCopy.boardId = null;
+    });
   }
 
   deleteUserIdFromTask(userId) {
-    this.tasks.forEach((task) => { if (task.userId === userId) task.userId = null });
+    this.tasks.forEach((task) => { 
+      const taskCopy = task;
+      if (taskCopy.userId === userId) taskCopy.userId = null;
+    });
   }
 }
 
