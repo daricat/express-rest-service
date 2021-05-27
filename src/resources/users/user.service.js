@@ -5,7 +5,7 @@ const getAll = () => usersDB.getAllUsers().map((user) => User.toResponse(user));
 
 const getUserbyId = (id) => User.toResponse(usersDB.getUserById(id));
 
-const addUser = (user) => User.toResponse(usersDB.add(new User(user)));
+const addUser = (user) => User.toResponse(usersDB.addUser(new User(user)));
 
 const updateUser = (id, fields) => User.toResponse(usersDB.updateUser(id, fields));
 
