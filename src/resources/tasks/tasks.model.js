@@ -1,5 +1,28 @@
 const uuid = require('uuid').v4;
 
+/** Type definition for Task.
+ * @typedef {Object} Task
+ * @property {string} id
+ * @property {string} title
+ * @property {number} order
+ * @property {string} description
+ * @property {string} userId
+ * @property {string} boardId
+ * @property {string} columnId
+ */
+
+/** Type definition for Tasks.
+ * @typedef {Object} Tasks
+ * @param {Task} [taskInfo={}] -- information about task
+ * @property {string} id
+ * @property {string} title
+ * @property {number} order
+ * @property {string} description
+ * @property {string} userId
+ * @property {string} boardId
+ * @property {string} columnId
+ */
+
 class Tasks {
   constructor(
     {
