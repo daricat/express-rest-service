@@ -9,6 +9,9 @@ const uuid = require('uuid').v4;
  */
 
 /** Type definition for User.
+ * @class
+ * @constructor
+ * @public
  * @typedef {Object} User
  * @param {UserInfo} [userInfo={}] -- information about user
  * @property {string} [id=uuid()]
