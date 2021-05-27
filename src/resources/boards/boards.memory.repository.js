@@ -48,7 +48,7 @@ class BoardDB {
    * @method updateBoard
    * @description -- update board by id
    * @param {string} id
-   * @param {Boards} updateFields
+   * @param {BoardInfo} updateFields
    * @return {Boards}
    */
   updateBoard(id, updateFields) {
