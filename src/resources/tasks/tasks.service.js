@@ -28,7 +28,9 @@ const addTask = (task) => taskDB.addTask(new Tasks(task));
 /**
  * @function updateTask
  * @description -- calls method from class [TaskDB]{@link taskDB} to update task
- * @param {Task} task
+ * @param {string} boardId
+ * @param {string} taskId
+ * @param {TaskInfo} fields
  * @return {Promise<Tasks>}
  */
 const updateTask = (boardId, taskId, fields) => taskDB.updateTask(boardId, taskId, fields);
