@@ -28,7 +28,7 @@ const addBoard = (board) => boardDB.addBoard(new Boards(board));
  * @function updateBoard
  * @description -- calls method from class [BoardDB]{@link boardDB} to update board
  * @param {string} id
- * @param {Boards} fields
+ * @param {BoardInfo} fields
  * @return {Promise<Boards>}
  */
 const updateBoard = (id, fields) => boardDB.updateBoard(id, fields);

@@ -19,7 +19,7 @@ const uuid = require('uuid').v4;
  * @constructor
  * @public
  * @typedef {Object} Boards
- * @param {Object} [BoardInfo={}] -- information about board
+ * @param {BoardInfo} [boardInfo={}] -- information about board
  * @property {string} [id=uuid()]
  * @property {string} [title='title']
  * @property {ColumnInfo[]} [columns=[]]
