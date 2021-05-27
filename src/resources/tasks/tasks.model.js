@@ -1,7 +1,7 @@
 const uuid = require('uuid').v4;
 
 /** Type definition for Task.
- * @typedef {Object} Task
+ * @typedef {Object} TaskInfo
  * @property {string} id
  * @property {string} title
  * @property {number} order
@@ -12,8 +12,11 @@ const uuid = require('uuid').v4;
  */
 
 /** Type definition for Tasks.
- * @typedef {Object} Tasks
- * @param {Task} [taskInfo={}] -- information about task
+ * @class
+ * @constructor
+ * @public
+ * @typedef {Tasks} Tasks
+ * @param {TaskInfo} [taskInfo={}] -- information about task
  * @property {string} id
  * @property {string} title
  * @property {number} order

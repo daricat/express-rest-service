@@ -53,7 +53,7 @@ class TaskDB {
    * @description -- update task by id
    * @param {string} boardId
    * @param {string} taskId
-   * @param {Tasks} updateFields
+   * @param {TaskInfo} updateFields
    * @return {Tasks} -- updated task
    */
   updateTask(boardId, taskId, updateFields) {
