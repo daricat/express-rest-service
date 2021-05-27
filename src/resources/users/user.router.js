@@ -6,7 +6,7 @@ const taskDB = require('../tasks/tasks.memory.repository');
 // Get all users
 
 router.route('/').get(async (req, res) => {
-  const users = await usersService.getAll();
+  const users = await usersService.getAllUsers();
   res.status(200).json(users);
 });
 
