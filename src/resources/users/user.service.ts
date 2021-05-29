@@ -1,12 +1,12 @@
-const { usersDB } = require('./user.memory.repository');
-const User = require('./user.model');
+import userDB from './user.memory.repository';
+import UserModel from './user.model';
 
 /**
  * @function getAllUsers
  * @description -- calls method from class [UserDB]{@link boardDB} to get all users
  * @return {Promise<User[]>}
  */
-const getAllUsers = () => usersDB.getAllUsers().map((user) => User.toResponse(user));
+const getAllUsers = () => userDB.getAllUsers().map((user) => UserModel.toResponse(user));
 
 /**
  * @function getUserbyId
@@ -14,7 +14,7 @@ const getAllUsers = () => usersDB.getAllUsers().map((user) => User.toResponse(us
  * @param {string} id
  * @return {Promise<User>}
  */
-const getUserbyId = (id) => User.toResponse(usersDB.getUserById(id));
+const getUserbyId = (id: string) => UserModel.toResponse(userDB.getUserById(id));
 
 /**
  * @function addUser
@@ -22,7 +22,8 @@ const getUserbyId = (id) => User.toResponse(usersDB.getUserById(id));
  * @param {UserInfo} user
  * @return {Promise<User>}
  */
-const addUser = (user) => User.toResponse(usersDB.addUser(new User(user)));
+const addUser = (user: UserModel) =>
+  UserModel.toResponse(userDB.addUser(new UserModel(user)));
 
 /**
  * @function updateUser
@@ -31,7 +32,8 @@ const addUser = (user) => User.toResponse(usersDB.addUser(new User(user)));
  * @param {UserInfo} fields
  * @return {Promise<User>}
  */
-const updateUser = (id, fields) => User.toResponse(usersDB.updateUser(id, fields));
+const updateUser = (id: string, fields: UserModel) =>
+  UserModel.toResponse(userDB.updateUser(id, fields));
 
 /**
  * @function deleteUser
@@ -39,6 +41,6 @@ const updateUser = (id, fields) => User.toResponse(usersDB.updateUser(id, fields
  * @param {string} id
  * @return {Promise}
  */
-const deleteUser = (id) => usersDB.deleteUser(id);
+const deleteUser = (id: string) => userDB.deleteUser(id);
 
-module.exports = { getAllUsers, getUserbyId, addUser, updateUser, deleteUser };
+export {getAllUsers, getUserbyId, addUser, updateUser, deleteUser};

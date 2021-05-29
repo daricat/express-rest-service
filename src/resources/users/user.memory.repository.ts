@@ -1,3 +1,4 @@
+import UserModel from './user.model';
 /**
  * Creates a new UserDB.
  * @class
@@ -7,6 +8,8 @@
  */
 
 class UsersDB {
+  users: UserModel[];
+
   constructor() {
     this.users = [];
   }
@@ -14,10 +17,10 @@ class UsersDB {
   /**
    * @method addUser
    * @description -- add new user in this.users store
-   * @param {User} user
-   * @return {User} -- new User exemplar
+   * @param {UserModel} user
+   * @return {UserModel} -- new User exemplar
    */
-  addUser(user) {
+  addUser(user: UserModel) {
     this.users.push(user);
     return user;
   }
@@ -25,9 +28,9 @@ class UsersDB {
   /**
    * @method getAllUsers
    * @description -- return all stored boards
-   * @return {User[]}
+   * @return {UserModel[]}
    */
-  getAllUsers() {
+  getAllUsers(): UserModel[] {
     return this.users;
   }
 
@@ -35,9 +38,9 @@ class UsersDB {
    * @method getUserById
    * @description -- get user by id
    * @param {string} id
-   * @return {User}
+   * @return {UserModel}
    */
-  getUserById(id) {
+  getUserById(id?: string): UserModel {
     const foundUserIndex = this.users.find((user) => user.id === id);
 
     if (!foundUserIndex) throw new Error(`The user with ${id} doesn't found!`);
@@ -49,14 +52,14 @@ class UsersDB {
    * @method updateUser
    * @description -- update user by id
    * @param {string} id
-   * @param {User} updateFields
-   * @return {User}
+   * @param {UserModel} updateFields
+   * @return {UserModel}
    */
-  updateUser(id, updateFields) {
+  updateUser(id: string, updateFields: UserModel): UserModel {
     const user = this.getUserById(id);
 
     Object.entries(updateFields).forEach(([key, value]) => {
-      user[key] = value;
+      Object.defineProperty(user, key, { value });
     });
 
     return user;
@@ -68,7 +71,7 @@ class UsersDB {
    * @param {string} id
    * @return {undefined}
    */
-  deleteUser(id) {
+  deleteUser(id: string): void {
     this.users = this.users.filter((user) => user.id !== id);
   }
 }
@@ -78,4 +81,4 @@ class UsersDB {
  */
 const usersDB = new UsersDB();
 
-module.exports = { usersDB };
+export default usersDB;

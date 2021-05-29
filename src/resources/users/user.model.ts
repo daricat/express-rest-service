@@ -20,7 +20,21 @@ const uuid = require('uuid').v4;
  * @property {string} [password='P@55w0rd']
  */
 
-class User {
+interface ISafetyUserModel {
+  id?: string;
+  name?: string;
+  login?: string;
+}
+
+export default class UserModel {
+  id?: string;
+
+  name?: string;
+
+  login?: string;
+
+  password?: string;
+
   constructor({
     id = uuid(),
     name = 'USER',
@@ -39,10 +53,8 @@ class User {
    * @description -- hide user password
    * @param {User} user
    */
-  static toResponse(user) {
+  static toResponse(user: UserModel): ISafetyUserModel {
     const { id, name, login } = user;
     return { id, name, login };
   }
 }
-
-module.exports = User;
