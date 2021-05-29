@@ -1,5 +1,15 @@
 const uuid = require('uuid').v4;
 
+interface ITaskModel {
+  id: string;
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+  boardId: string;
+  columnId: string;
+}
+
 /** Type definition for Task.
  * @typedef {Object} TaskInfo
  * @property {string} id
@@ -26,18 +36,32 @@ const uuid = require('uuid').v4;
  * @property {string} columnId
  */
 
-class Tasks {
+class TaskModel {
+  id: string;
+
+  title: string;
+
+  order: number;
+
+  description: string;
+
+  userId: string;
+
+  boardId: string;
+
+  columnId: string;
+
   constructor(
     {
       id = uuid(),
       title = 'title',
       order = 0,
       description = 'description',
-      userId = null,
-      boardId = null,
-      columnId = null,
+      userId = '',
+      boardId = '',
+      columnId = '',
     } = {},
-    reqBoardId
+    reqBoardId: string
   ) {
     this.id = id;
     this.title = title;
@@ -49,4 +73,4 @@ class Tasks {
   }
 }
 
-module.exports = Tasks;
+export { ITaskModel, TaskModel };

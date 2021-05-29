@@ -50,7 +50,7 @@ router
   .route('/:userId')
   .delete(async (req: express.Request, res: express.Response) => {
     await userServices.deleteUser(req.params.userId || '');
-    await taskDB.deleteUserIdFromTask(req.params.userId);
+    await taskDB.deleteBoardsIdFromTask(req.params.userId || '');
     res.status(204).send('Deleting is completed');
   });
 

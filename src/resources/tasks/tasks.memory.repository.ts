@@ -1,3 +1,5 @@
+import { TaskModel } from './tasks.model';
+
 /**
  * Creates a new TaskDB.
  * @class
@@ -7,6 +9,8 @@
  */
 
 class TaskDB {
+  tasks: TaskModel[];
+
   constructor() {
     this.tasks = [];
   }
@@ -17,7 +21,7 @@ class TaskDB {
    * @param {Tasks} task
    * @return {Tasks} -- new Tasks exemplar
    */
-  addTask(task) {
+  addTask(task: TaskModel) {
     this.tasks.push(task);
     return task;
   }
@@ -28,7 +32,7 @@ class TaskDB {
    * @param {string} boardId
    * @return {Tasks[]} -- all tasks from board by id
    */
-  getAllTasks(boardId) {
+  getAllTasks(boardId: string): TaskModel[] {
     return this.tasks.filter((task) => task.boardId === boardId);
   }
 
@@ -39,7 +43,7 @@ class TaskDB {
    * @param {string} taskId
    * @return {Tasks | Error} -- found task or error
    */
-  getTaskById(boardId, taskId) {
+  getTaskById(boardId: string, taskId: string) {
     const foundtaskIndex = this.tasks.find(
       (task) => task.id === taskId && task.boardId === boardId
     );
@@ -56,11 +60,11 @@ class TaskDB {
    * @param {TaskInfo} updateFields
    * @return {Tasks} -- updated task
    */
-  updateTask(boardId, taskId, updateFields) {
+  updateTask(boardId: string, taskId: string, updateFields: TaskModel) {
     const task = this.getTaskById(boardId, taskId);
 
     Object.entries(updateFields).forEach(([key, value]) => {
-      task[key] = value;
+      Object.defineProperty(task, key, { value });
     });
 
     return task;
@@ -73,7 +77,7 @@ class TaskDB {
    * @param {string} taskId
    * @return {undefined}
    */
-  deleteTask(boardId, taskId) {
+  deleteTask(boardId: string, taskId: string) {
     this.tasks = this.tasks.filter(
       (task) => task.id !== taskId || task.boardId !== boardId
     );
@@ -85,23 +89,10 @@ class TaskDB {
    * @param {string} boardId
    * @return {undefined}
    */
-  deleteBoardsIdFromTask(boardId) {
+  deleteBoardsIdFromTask(boardId: string) {
     this.tasks.forEach((task) => {
       const taskCopy = task;
-      if (taskCopy.boardId === boardId) taskCopy.boardId = null;
-    });
-  }
-
-  /**
-   * @method deleteUserIdFromTask
-   * @description -- delete user from task if deleting user
-   * @param {string} userId
-   * @return {undefined}
-   */
-  deleteUserIdFromTask(userId) {
-    this.tasks.forEach((task) => {
-      const taskCopy = task;
-      if (taskCopy.userId === userId) taskCopy.userId = null;
+      if (taskCopy.boardId === boardId) taskCopy.boardId = '';
     });
   }
 }
@@ -111,4 +102,4 @@ class TaskDB {
  */
 const taskDB = new TaskDB();
 
-module.exports = taskDB;
+export default taskDB;

@@ -1,3 +1,5 @@
+import {ITaskModel, TaskModel} from "./tasks.model";
+
 const taskDB = require('./tasks.memory.repository');
 const Tasks = require('./tasks.model');
 
@@ -6,7 +8,7 @@ const Tasks = require('./tasks.model');
  * @description -- calls method from class [TaskDB]{@link taskDB} to get all tasks
  * @return {Promise<Tasks[]>}
  */
-const getAllTasks = (boardId) => taskDB.getAllTasks(boardId);
+const getAllTasks = (boardId: string) => taskDB.getAllTasks(boardId);
 
 /**
  * @function getTaskById
@@ -15,7 +17,7 @@ const getAllTasks = (boardId) => taskDB.getAllTasks(boardId);
  * @param {string} taskId
  * @return {Promise<Tasks>}
  */
-const getTaskById = (boardId, taskId) => taskDB.getTaskById(boardId, taskId);
+const getTaskById = (boardId: string, taskId: string) => taskDB.getTaskById(boardId, taskId);
 
 /**
  * @function addTask
@@ -23,7 +25,7 @@ const getTaskById = (boardId, taskId) => taskDB.getTaskById(boardId, taskId);
  * @param {Task} task
  * @return {Promise<Tasks>}
  */
-const addTask = (task) => taskDB.addTask(new Tasks(task));
+const addTask = (task: ITaskModel) => taskDB.addTask(new Tasks(task));
 
 /**
  * @function updateTask
@@ -33,7 +35,7 @@ const addTask = (task) => taskDB.addTask(new Tasks(task));
  * @param {TaskInfo} fields
  * @return {Promise<Tasks>}
  */
-const updateTask = (boardId, taskId, fields) => taskDB.updateTask(boardId, taskId, fields);
+const updateTask = (boardId: string, taskId: string, fields: TaskModel) => taskDB.updateTask(boardId, taskId, fields);
 
 /**
  * @function deleteTask
@@ -42,6 +44,6 @@ const updateTask = (boardId, taskId, fields) => taskDB.updateTask(boardId, taskI
  * @param {string} taskId
  * @return {Promise}
  */
-const deleteTask = (boardId, taskId) => taskDB.deleteTask(boardId, taskId);
+const deleteTask = (boardId: string, taskId: string) => taskDB.deleteTask(boardId, taskId);
 
-module.exports = { getAllTasks, getTaskById, addTask, updateTask, deleteTask };
+export { getAllTasks, getTaskById, addTask, updateTask, deleteTask };
