@@ -1,4 +1,4 @@
-import { TaskModel } from './tasks.model';
+import TaskModel from './tasks.model';
 
 /**
  * Creates a new TaskDB.

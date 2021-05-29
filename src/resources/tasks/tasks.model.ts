@@ -1,15 +1,5 @@
 const uuid = require('uuid').v4;
 
-interface ITaskModel {
-  id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string;
-  boardId: string;
-  columnId: string;
-}
-
 /** Type definition for Task.
  * @typedef {Object} TaskInfo
  * @property {string} id
@@ -36,7 +26,7 @@ interface ITaskModel {
  * @property {string} columnId
  */
 
-class TaskModel {
+export default class TaskModel {
   id: string;
 
   title: string;
@@ -72,5 +62,3 @@ class TaskModel {
     this.columnId = columnId;
   }
 }
-
-export { ITaskModel, TaskModel };

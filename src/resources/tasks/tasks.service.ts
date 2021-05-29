@@ -1,4 +1,4 @@
-import {ITaskModel, TaskModel} from "./tasks.model";
+import TaskModel from "./tasks.model";
 
 const taskDB = require('./tasks.memory.repository');
 const Tasks = require('./tasks.model');
@@ -25,7 +25,7 @@ const getTaskById = (boardId: string, taskId: string) => taskDB.getTaskById(boar
  * @param {Task} task
  * @return {Promise<Tasks>}
  */
-const addTask = (task: ITaskModel) => taskDB.addTask(new Tasks(task));
+const addTask = (task: TaskModel) => taskDB.addTask(new Tasks(task));
 
 /**
  * @function updateTask
