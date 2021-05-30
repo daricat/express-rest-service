@@ -1,12 +1,10 @@
 import TaskModel from "./tasks.model";
-
-const taskDB = require('./tasks.memory.repository');
-const Tasks = require('./tasks.model');
+import taskDB from './tasks.memory.repository';
 
 /**
  * @function getAllTasks
  * @description -- calls method from class [TaskDB]{@link taskDB} to get all tasks
- * @return {Promise<Tasks[]>}
+ * @return {Promise<TaskModel[]>}
  */
 const getAllTasks = (boardId: string) => taskDB.getAllTasks(boardId);
 
@@ -15,7 +13,7 @@ const getAllTasks = (boardId: string) => taskDB.getAllTasks(boardId);
  * @description -- calls method from class [TaskDB]{@link taskDB} to get tasks by id
  * @param {string} boardId
  * @param {string} taskId
- * @return {Promise<Tasks>}
+ * @return {Promise<TaskModel>}
  */
 const getTaskById = (boardId: string, taskId: string) => taskDB.getTaskById(boardId, taskId);
 
@@ -25,7 +23,7 @@ const getTaskById = (boardId: string, taskId: string) => taskDB.getTaskById(boar
  * @param {Task} task
  * @return {Promise<Tasks>}
  */
-const addTask = (task: TaskModel) => taskDB.addTask(new Tasks(task));
+const addTask = (task: TaskModel, reqId: string) => taskDB.addTask(new TaskModel(task, reqId));
 
 /**
  * @function updateTask

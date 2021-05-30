@@ -47,7 +47,9 @@ class TaskDB {
     const foundtaskIndex = this.tasks.find(
       (task) => task.id === taskId && task.boardId === boardId
     );
-    if (!foundtaskIndex) throw new Error();
+
+    if (!foundtaskIndex)
+      throw new Error(`The task with ${taskId} doesn't found!`);
 
     return foundtaskIndex;
   }
@@ -63,6 +65,8 @@ class TaskDB {
   updateTask(boardId: string, taskId: string, updateFields: TaskModel) {
     const task = this.getTaskById(boardId, taskId);
 
+    if (!task) throw new Error(`The task with ${taskId} doesn't found!`);
+
     Object.entries(updateFields).forEach(([key, value]) => {
       Object.defineProperty(task, key, { value });
     });
@@ -77,23 +81,39 @@ class TaskDB {
    * @param {string} taskId
    * @return {undefined}
    */
-  deleteTask(boardId: string, taskId: string) {
+  deleteTask(boardId: string, taskId: string): null {
     this.tasks = this.tasks.filter(
       (task) => task.id !== taskId || task.boardId !== boardId
     );
+    return null;
   }
 
   /**
    * @method deleteBoardsIdFromTask
    * @description -- delete board from task if deleting board
    * @param {string} boardId
-   * @return {undefined}
+   * @return {null}
    */
-  deleteBoardsIdFromTask(boardId: string) {
+  deleteBoardsIdFromTask(boardId: string): undefined {
     this.tasks.forEach((task) => {
       const taskCopy = task;
-      if (taskCopy.boardId === boardId) taskCopy.boardId = '';
+      if (taskCopy.boardId === boardId) taskCopy.boardId = undefined;
     });
+    return undefined;
+  }
+
+  /**
+   * @method deleteUserIdFromTask
+   * @description -- delete board from task if deleting board
+   * @param {string} userId
+   * @return {null}
+   */
+  deleteUserIdFromTask(userId: string): null {
+    this.tasks.forEach((task) => {
+      const taskCopy = task;
+      if (taskCopy.userId === userId) taskCopy.userId = null;
+    });
+    return null;
   }
 }
 

@@ -26,21 +26,21 @@ interface ISafetyUserModel {
   login?: string;
 }
 
-export default class UserModel {
-  id?: string;
+class UserModel {
+  id: string;
 
-  name?: string;
+  name: string;
 
-  login?: string;
+  login: string;
 
-  password?: string;
+  password: string;
 
   constructor({
     id = uuid(),
     name = 'USER',
     login = 'user',
     password = 'P@55w0rd',
-  } = {}) {
+  }: UserModel) {
     this.id = id;
     this.name = name;
     this.login = login;
@@ -53,8 +53,13 @@ export default class UserModel {
    * @description -- hide user password
    * @param {User} user
    */
-  static toResponse(user: UserModel): ISafetyUserModel {
-    const { id, name, login } = user;
-    return { id, name, login };
+  static toResponse(user?: UserModel): ISafetyUserModel | undefined {
+    if (user) {
+      const { id, name, login } = user;
+      return { id, name, login };
+    }
+    return undefined;
   }
 }
+
+export { ISafetyUserModel, UserModel };

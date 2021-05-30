@@ -35,9 +35,9 @@ export default class TaskModel {
 
   description: string;
 
-  userId: string;
+  userId: string | null;
 
-  boardId: string;
+  boardId?: string | undefined;
 
   columnId: string;
 
@@ -50,7 +50,7 @@ export default class TaskModel {
       userId = '',
       boardId = '',
       columnId = '',
-    } = {},
+    }: TaskModel,
     reqBoardId: string
   ) {
     this.id = id;

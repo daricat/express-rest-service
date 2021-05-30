@@ -1,5 +1,5 @@
-const boardDB = require('./boards.memory.repository');
-const Boards = require('./boards.model');
+import BoardModel from './boards.model';
+import boardDB from './boards.memory.repository';
 
 /**
  * @function getAllBoards
@@ -14,24 +14,24 @@ const getAllBoards = () => boardDB.getAllBoards();
  * @param {string} id
  * @return {Promise<Boards>}
  */
-const getBoardById = (id) => boardDB.getBoardById(id);
+const getBoardById = (id: string) => boardDB.getBoardById(id);
 
 /**
  * @function addBoard
  * @description -- calls method from class [BoardDB]{@link boardDB} to add board
  * @param {Boards} board
- * @return {Promise<Boards>}
+ * @return {Promise<BoardModel>}
  */
-const addBoard = (board) => boardDB.addBoard(new Boards(board));
+const addBoard = (board: BoardModel) => boardDB.addBoard(board);
 
 /**
  * @function updateBoard
  * @description -- calls method from class [BoardDB]{@link boardDB} to update board
  * @param {string} id
  * @param {BoardInfo} fields
- * @return {Promise<Boards>}
+ * @return {Promise<BoardModel>}
  */
-const updateBoard = (id, fields) => boardDB.updateBoard(id, fields);
+const updateBoard = (id: string, fields: BoardModel) => boardDB.updateBoard(id, fields);
 
 /**
  * @function deleteBoard
@@ -39,12 +39,6 @@ const updateBoard = (id, fields) => boardDB.updateBoard(id, fields);
  * @param {string} id
  * @return {Promise}
  */
-const deleteBoard = (id) => boardDB.deleteBoard(id);
+const deleteBoard = (id: string) => boardDB.deleteBoard(id);
 
-module.exports = {
-  getAllBoards,
-  getBoardById,
-  addBoard,
-  updateBoard,
-  deleteBoard,
-};
+export { getAllBoards, getBoardById, addBoard, updateBoard, deleteBoard };

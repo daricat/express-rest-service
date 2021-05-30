@@ -1,5 +1,4 @@
 import express from 'express';
-import TaskModel from './tasks.model';
 import * as taskService from './tasks.service';
 
 const router = express.Router();
@@ -35,7 +34,8 @@ router
   .route('/:boardId/tasks')
   .post(async (req: express.Request, res: express.Response) => {
     const newUser = await taskService.addTask(
-      new TaskModel(req.body, req.params.boardId || '')
+      req.body,
+      req.params.boardId || ''
     );
     res.status(201).json(newUser);
   });
@@ -45,12 +45,16 @@ router
 router
   .route('/:boardId/tasks/:taskId')
   .put(async (req: express.Request, res: express.Response) => {
-    const updateFields = await taskService.updateTask(
-      req.params.boardId || '',
-      req.params.taskId || '',
-      req.body
-    );
-    res.status(200).json(updateFields);
+    try {
+      const updateFields = await taskService.updateTask(
+        req.params.boardId || '',
+        req.params.taskId || '',
+        req.body
+      );
+      res.status(200).json(updateFields);
+    } catch (error) {
+      res.status(404).json("Task isn't found");
+    }
   });
 
 // Delete task

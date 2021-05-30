@@ -1,3 +1,4 @@
+import BoardModel from './boards.model';
 /**
  * Creates a new BoardDB.
  * @class
@@ -7,6 +8,8 @@
  */
 
 class BoardDB {
+  boards: BoardModel[];
+
   constructor() {
     this.boards = [];
   }
@@ -17,8 +20,9 @@ class BoardDB {
    * @param {Boards} board
    * @return {Boards} -- new Boards exemplar
    */
-  addBoard(board) {
-    this.boards.push(board);
+  addBoard(board: BoardModel) {
+    const newBoard = new BoardModel(board);
+    this.boards.push(newBoard);
     return board;
   }
 
@@ -37,9 +41,9 @@ class BoardDB {
    * @param {string} id
    * @return {Boards}
    */
-  getBoardById(id) {
+  getBoardById(id: string) {
     const foundBoardIndex = this.boards.find((board) => board.id === id);
-    if (!foundBoardIndex) throw new Error();
+    if (!foundBoardIndex) throw new Error(`The board with ${id} doesn't found!`);
 
     return foundBoardIndex;
   }
@@ -51,11 +55,13 @@ class BoardDB {
    * @param {BoardInfo} updateFields
    * @return {Boards}
    */
-  updateBoard(id, updateFields) {
+  updateBoard(id: string, updateFields: BoardModel): BoardModel {
     const board = this.getBoardById(id);
 
+    if (!board) throw new Error(`The board with ${id} doesn't found!`);
+
     Object.entries(updateFields).forEach(([key, value]) => {
-      board[key] = value;
+      Object.defineProperty(board, key, { value });
     });
 
     return board;
@@ -66,14 +72,15 @@ class BoardDB {
    * @description -- delete board by id
    * @param {string} id
    */
-  deleteBoard(id) {
+  deleteBoard(id: string): undefined {
     this.boards = this.boards.filter((board) => board.id !== id);
+    return undefined;
   }
 }
 
-/** 
+/**
  * @type {BoardDB}
-*/
+ */
 const boardDB = new BoardDB();
 
-module.exports = boardDB;
+export default boardDB;

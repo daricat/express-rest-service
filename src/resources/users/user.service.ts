@@ -1,5 +1,5 @@
 import userDB from './user.memory.repository';
-import UserModel from './user.model';
+import {UserModel} from './user.model';
 
 /**
  * @function getAllUsers
@@ -22,8 +22,7 @@ const getUserbyId = (id: string) => UserModel.toResponse(userDB.getUserById(id))
  * @param {UserInfo} user
  * @return {Promise<User>}
  */
-const addUser = (user: UserModel) =>
-  UserModel.toResponse(userDB.addUser(new UserModel(user)));
+const addUser = (user: UserModel) => UserModel.toResponse(userDB.addUser(new UserModel(user)));
 
 /**
  * @function updateUser
@@ -32,8 +31,7 @@ const addUser = (user: UserModel) =>
  * @param {UserInfo} fields
  * @return {Promise<User>}
  */
-const updateUser = (id: string, fields: UserModel) =>
-  UserModel.toResponse(userDB.updateUser(id, fields));
+const updateUser = (id: string, fields: UserModel) => UserModel.toResponse(userDB.updateUser(id, fields));
 
 /**
  * @function deleteUser

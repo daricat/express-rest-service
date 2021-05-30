@@ -7,9 +7,9 @@ const router = express.Router();
 
 // Get all users
 
-router.route('/').get(async (req: express.Request, res: express.Response) => {
+router.route('/').get(async (_req: express.Request, res: express.Response) => {
   const users = await userServices.getAllUsers();
-  res.status(200).json(users);
+  res.json(users);
 });
 
 // Get user by id
@@ -37,11 +37,15 @@ router.route('/').post(async (req: express.Request, res: express.Response) => {
 router
   .route('/:userId')
   .put(async (req: express.Request, res: express.Response) => {
-    const updateFields = await userServices.updateUser(
-      req.params.userId || '',
-      req.body
-    );
-    res.status(200).json(updateFields);
+    try {
+      const updateFields = await userServices.updateUser(
+        req.params.userId || '',
+        req.body
+      );
+      res.status(200).json(updateFields);
+    } catch (error) {
+      res.status(404).send("User isn't found");
+    }
   });
 
 // Delete user by id
@@ -50,8 +54,8 @@ router
   .route('/:userId')
   .delete(async (req: express.Request, res: express.Response) => {
     await userServices.deleteUser(req.params.userId || '');
-    await taskDB.deleteBoardsIdFromTask(req.params.userId || '');
-    res.status(204).send('Deleting is completed');
+    await taskDB.deleteUserIdFromTask(req.params.userId || '');
+    res.status(204).send(null);
   });
 
 export default router;

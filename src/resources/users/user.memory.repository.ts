@@ -1,4 +1,4 @@
-import UserModel from './user.model';
+import {UserModel} from './user.model';
 /**
  * Creates a new UserDB.
  * @class
@@ -40,7 +40,7 @@ class UsersDB {
    * @param {string} id
    * @return {UserModel}
    */
-  getUserById(id?: string): UserModel {
+  getUserById(id: string): UserModel {
     const foundUserIndex = this.users.find((user) => user.id === id);
 
     if (!foundUserIndex) throw new Error(`The user with ${id} doesn't found!`);
@@ -55,8 +55,10 @@ class UsersDB {
    * @param {UserModel} updateFields
    * @return {UserModel}
    */
-  updateUser(id: string, updateFields: UserModel): UserModel {
+  updateUser(id: string, updateFields: UserModel) {
     const user = this.getUserById(id);
+
+    if (!user) throw new Error(`The user with ${id} doesn't found!`);
 
     Object.entries(updateFields).forEach(([key, value]) => {
       Object.defineProperty(user, key, { value });
@@ -71,8 +73,9 @@ class UsersDB {
    * @param {string} id
    * @return {undefined}
    */
-  deleteUser(id: string): void {
+  deleteUser(id: string): null {
     this.users = this.users.filter((user) => user.id !== id);
+    return null;
   }
 }
 
